@@ -6,7 +6,7 @@
   
   <mapper namespace="com.hsp.spring.test.database.dao.StoreDAO">
 	
-	<select id="selectStoreList" resultType="com.hsp.spring.test.model.Store">
+	<select id="selectStoreList" resultType="com.hsp.spring.test.database.model.Store">
 	
 		SELECT
 			`id`

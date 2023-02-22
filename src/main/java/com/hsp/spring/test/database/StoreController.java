@@ -20,6 +20,7 @@ public class StoreController {
 	@ResponseBody
 	public List<Store> test01() {
 		// store 목록 가져오기
-		List<Store> storeList = storeBO.
+		List<Store> storeList = storeBO.getStoreList();
+		return storeList;
 	}
 }
