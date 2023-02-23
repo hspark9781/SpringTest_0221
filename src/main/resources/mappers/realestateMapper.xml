@@ -43,7 +43,7 @@
   	</select>
   	
   	<select id="selectRealEstateAreaPrice" resultType="com.hsp.spring.test.mybatis.model.RealEstate"
-  		parameterType="int">
+  		parameterType="map">
   		SELECT
   			`id`
   			, `realtorId`
