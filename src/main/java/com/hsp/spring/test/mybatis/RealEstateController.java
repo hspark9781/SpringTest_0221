@@ -54,7 +54,7 @@ public class RealEstateController {
 		realEstate.setType("매매");
 		realEstate.setPrice(100000);
 		
-		int count = realEstateBO.addReviewByObject(realEstate);
+		int count = realEstateBO.addRealEstateByObject(realEstate);
 		
 		return "입력 성공 : " + count; 
 		
@@ -64,7 +64,7 @@ public class RealEstateController {
 	@RequestMapping("/test02/2")
 	@ResponseBody
 	public String addRealEstate(@RequestParam("realtorId") int realtorId) {
-		int count = realEstateBO.addReview(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+		int count = realEstateBO.addRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
 		
 		return "입력 성공 : " + count;
 		

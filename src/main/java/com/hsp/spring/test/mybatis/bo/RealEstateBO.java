@@ -34,11 +34,11 @@ public class RealEstateBO {
 	
 	
 	
-	public int addReviewByObject(RealEstate realEstate) {
+	public int addRealEstateByObject(RealEstate realEstate) {
 		return realEstateDAO.insertRealEstateByObject(realEstate);
 	}
 	
-	public int addReview(
+	public int addRealEstate(
 			int realtorId
 			, String address
 			, int area
