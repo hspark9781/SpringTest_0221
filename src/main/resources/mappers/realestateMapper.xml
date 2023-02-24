@@ -57,10 +57,66 @@
   		FROM 
   			`real_estate`
   		WHERE
-  			<![CDATA[ `area` >= #{area} ]]> AND <![CDATA[ `price` <= #{price} ]]>
+  			<![CDATA[ `area` >= #{area}
+  			AND `price` <= #{price} ]]>
   		ORDER BY
   			`id` DESC
   	</select>
+  	
+  	<insert id="insertRealEstateByObject" parameterType="com.hsp.spring.test.mybatis.model.RealEstate">
+  		INSERT INTO
+  			`real_estate`
+  			(
+	  				`realtorId`
+	  			, `address`
+	  			, `area`
+	  			, `type`
+	  			, `price`
+	  			, `rentPrice`
+	  			, `createdAt`
+	  			, `updatedAt`
+  			)
+  		VALUE
+  			(
+  				#{realtorId}
+  				, #{address}
+  				, #{area}
+  				, #{type}
+  				, #{price}
+  				, NULL
+  				, now()
+  				, now()
+  			)
+  			
+  	</insert>
+  	
+  	<insert id="insertRealEstate" parameterType="map">
+  		INSERT INTO
+  			`real_estate`
+  			(
+	  				`realtorId`
+	  			, `address`
+	  			, `area`
+	  			, `type`
+	  			, `price`
+	  			, `rentPrice`
+	  			, `createdAt`
+	  			, `updatedAt`
+  			)
+  		VALUE
+  			(
+  				#{realtorId}
+  				, #{address}
+  				, #{area}
+  				, #{type}
+  				, #{price}
+  				, NULL
+  				, now()
+  				, now()
+  			)
+  	</insert>
+  				
+  	
   		
   		
   

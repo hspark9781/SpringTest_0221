@@ -9,13 +9,27 @@ import com.hsp.spring.test.mybatis.model.RealEstate;
 
 @Repository
 public interface RealEstateDAO {
-	// 1.
+	// id 로 select 하기
 	public RealEstate selectRealEstateId(@Param("id") int id);
 	
-	// 2.
+	// 월세 조건 select
 	public List<RealEstate> selectRealEstateRent(@Param("rent") int rent);
 	
-	// 3.
-	public List<RealEstate> selectRealEstateAreaPrice(@Param("area") int area, @Param("price") int price);
+	// 복합조건 select
+	public List<RealEstate> selectRealEstateAreaPrice(
+			@Param("area") int area
+			, @Param("price") int price);
+	
+	// 객체로 insert 하기
+	public int insertRealEstateByObject(RealEstate realEstate);
+	
+	// field 로 insert 하기
+	public int insertRealEstate(
+			@Param("realtorId") int realtorId
+			, @Param("address") String address
+			, @Param("area") int area
+			, @Param("type") String type
+			, @Param("price") int price
+			, @Param("rentPrice") int rentPrice);
 	
 }
