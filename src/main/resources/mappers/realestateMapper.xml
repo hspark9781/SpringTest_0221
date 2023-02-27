@@ -117,7 +117,8 @@
   	
   	
   	<update id="updateRealEstate" parameterType="map">
-  		UPDATE `real_estate`
+  		UPDATE 
+  			`real_estate`
   		SET
   			`type` = #{type}
   			, `price` = #{price}

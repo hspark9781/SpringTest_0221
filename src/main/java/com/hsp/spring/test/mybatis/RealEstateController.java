@@ -73,7 +73,7 @@ public class RealEstateController {
 	@RequestMapping("/test03")
 	@ResponseBody
 	public String updateRealEstate() {
-		int count = realEstateBO.updateRealEstate(24, "전세", 70000);
+		int count = realEstateBO.updateRealEstate(31, "전세", 70000);
 		
 		return "수정 성공 : " + count;
 	}

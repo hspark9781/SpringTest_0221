@@ -35,8 +35,7 @@ public interface RealEstateDAO {
 	public int updateRealEstate(
 			@Param("id") int id
 			, @Param("type") String type
-			, @Param("price") int price
-			);
+			, @Param("price") int price);
 	
 	public int deleteRealEstate(@Param("id") int id);
 	
