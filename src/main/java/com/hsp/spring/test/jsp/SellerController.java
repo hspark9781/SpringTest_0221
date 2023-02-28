@@ -38,11 +38,29 @@ public class SellerController {
 	
 	
 	@GetMapping("/info")
-	public String sellerInfo(Model model) {
-		Seller seller = sellerBO.getLastSeller();
+	public String sellerInfo(@RequestParam(value="id", required=false) Integer id, Model model) {
+		// RequestParam -> required 사용법 주의
+	// int는 객체가 아니기 때문에 null을 저장할수 없다. => 객체형태인 Integer로 바꿔줘야한다.
+		Seller seller = null;
+		if(id != null) {
+			// id 파라미터가 있으면 id로 seller정보 조회
+			seller = sellerBO.getSeller(id);
+		} else {
+			// id 파라미터가 없다면 최근 등록된 seller정보 조회
+			seller = sellerBO.getLastSeller();
+		}
+		
 		model.addAttribute("seller", seller);
+		
 		return "jsp/seller_info";
 	}
+	
+			
+		
+		
+		
+
+
 	
 	
 }
