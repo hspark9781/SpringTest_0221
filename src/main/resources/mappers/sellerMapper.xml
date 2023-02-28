@@ -24,4 +24,21 @@
   			, now()
   		)
   	</insert>
+  	
+  	<select id="selectLastSeller" resultType="com.hsp.spring.test.jsp.model.Seller">
+  		SELECT 
+  			`id`
+  			, `nickname`
+			, `temperature`
+			, `profileImage`  	
+			, `createdAt`	
+			, `updatedAt`
+  		FROM 
+  			`seller`
+  		ORDER BY 
+  			`id` DESC
+  		LIMIT 
+  			1 
+  	
+  	</select>
   </mapper>
