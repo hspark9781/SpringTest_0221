@@ -7,7 +7,7 @@
   
   <mapper namespace="com.hsp.spring.test.jsp.dao.RealtorDAO">
   
-  	<insert id="InsertRealtorByObejct" parameterType="com.hsp.spring.test.jsp.model.Realtor"
+  	<insert id="InsertRealtorByObject" parameterType="com.hsp.spring.test.jsp.model.Realtor"
 	  	useGeneratedKeys="true" keyProperty="id">
 	  	INSERT INTO
   			`realtor`
