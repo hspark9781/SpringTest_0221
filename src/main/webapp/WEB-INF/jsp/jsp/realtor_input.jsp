@@ -12,26 +12,15 @@
 </head>
 <body>
 
-	<div>
+	<div class="container">
 		<h2>공인중개사 추가</h2>
-		<form method="post" action="/jsp/realtor/add">
-			<div>
-				<label>상호명</label> <br>
-				<input type="text" class="col-4 form-control" name="office">
-			</div>
-			<div>
-				<label>전화번호</label> <br>
-				<input type="text" class="col-4 form-control" name="phoneNumber">
-			</div>
-			<div>
-				<label>주소</label> <br>
-				<input type="text" class="col-4 form-control" name="address">
-			</div>
-			<div>
-				<label>등급</label> <br>
-				<input type="text" class="col-4 form-control" name="grade">
-			</div>
-			<button type="submit" class="btn btn-primary">추가</button>
+		<form method="get" action="/jsp/realtor/add">
+			<label>상호명</label> <input type="text" class="col-4 form-control" name="office">
+			<label>전화번호</label> <input type="text" class="col-4 form-control" name="phoneNumber">
+			<label>주소</label> <input type="text" class="col-4 form-control" name="address">
+			<label>등급</label> <input type="text" class="col-4 form-control" name="grade">
+			
+			<button type="submit" class="btn btn-primary mt-3">추가</button>
 		</form>
 	</div>
 </body>
