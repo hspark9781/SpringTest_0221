@@ -36,9 +36,10 @@
 		<h3>${average }</h3>
 	</c:if>
 	
+	
 	<h2>5. core if</h2>
 	<c:if test="${(number1 * number2) > 100 }">
-		<script>alert('너무 큰 수입니다.')</script>
+		<c:out value="<script>alert('너무 큰 수입니다.')</script>" escapeXml="false"/>
 	</c:if>
 
 </body>
