@@ -35,8 +35,8 @@
 		</table>
 		
 		<h1>2.카드 명세서</h1>
-		<table class="table">
-			<thead>
+		<table class="table border border-success">
+			<thead class="bg-success text-light">
 				<tr>
 					<th>사용처</th>
 					<th>가격</th>
