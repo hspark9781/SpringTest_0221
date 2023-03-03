@@ -46,7 +46,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="cardBill" items="${cardBills }">
-				<fmt:formatNumber value="${cardBill.pay }" var="pay"/>
+				<fmt:formatNumber value="${cardBill.pay }" type="currency" var="pay"/>
 				<fmt:parseDate value="${cardBill.date }" pattern="yyyy-MM-dd" var="dateString"/>
 				<fmt:formatDate value="${dateString }" pattern="yyyy년 MM월 dd일" var="date"/>
 				<tr>
