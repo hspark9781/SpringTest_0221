@@ -41,11 +41,11 @@
 						</c:otherwise>
 					</c:choose>
 					<td>${fn:replace(member.nationality, "삼국시대", "삼국-") }</td>
-					<td>${member.email }</td>
+					<td><b>${fn:split(member.email, "@")[0] }</b>@${fn:split(member.email, "@")[1] }</td>
 					<c:choose>
 						<c:when test="${fn:length(member.introduce) > 15 }">
 							<c:set var="introduce" value="${member.introduce }"/>
-							<td>${fn:substring(introduce, 0, 15) }....</td>
+							<td>${fn:substring(introduce, 0, 15) } ...</td>
 						</c:when>
 						<c:otherwise>
 							<td>${member.introduce} </td>
