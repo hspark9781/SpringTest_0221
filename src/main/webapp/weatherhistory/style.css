@@ -4,21 +4,22 @@
 	margin:auto;
 	width:1200px;
 }
-	
-.main-menu {
-	width:200px;
-	height:700px;
-}
-
-.contents{
-	width:1000px;
-	height:700px;
-}
 
 .logo {
-	height:150px;
+	height:70px;
 }
+
+.side {
+	width:200px;
+}
+
+
+
 
 footer {
 	height:70px;
 }
+
+
+
+	
