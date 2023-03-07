@@ -24,10 +24,10 @@
 			<nav class="main-menu">
 				<ul class="nav flex-column mt-2">
 					<li class="nav-item">
-						<a class="nav-link font-weight-bold text-light" href="#">날씨</a>
+						<a class="nav-link font-weight-bold text-light" href="/weatherhistory/info">날씨</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link font-weight-bold text-light" href="/jsp/jstl/weatherhistory_input">날씨입력</a>
+						<a class="nav-link font-weight-bold text-light" href="#">날씨입력</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold text-light" href="#">테마날씨</a>
@@ -41,14 +41,14 @@
 			
 			<div class="contents1 col-10">
 				<div><h2>날씨 입력</h2></div>
-				<form method="get" action="/weatherhistory/info">
+				<form method="get" action="/jstl/weatherhistory/add">
 						<div class="d-flex">
 							<div class="d-flex col-4">
-								<label class="d-flex align-items-end">날짜</label><input type="text" class=" col-7 form-control">
+								<label class="d-flex align-items-end">날짜</label><input type="text" class=" col-7 form-control" name="date">
 							</div>
 							<div class="d-flex col-4">
 								<label class="d-flex align-items-end">날씨</label>
-								<select class="form-control col-7">
+								<select class="form-control col-7" name="weather">
 									<option>맑음</option>
 									<option>흐림</option>
 									<option>구름조금</option>
@@ -57,7 +57,7 @@
 							</div>
 							<div class="d-flex col-4">
 								<label class="ml-5 d-flex align-items-end">미세먼지</label>
-								<select class="form-control col-7">
+								<select class="form-control col-7" name="microDust">
 									<option>좋음</option>
 									<option>보통</option>
 									<option>나쁨</option>
@@ -70,19 +70,19 @@
 						</div>
 						<div class="mt-4 d-flex justify-content-between">
 							<div class="input-group col-3">
-		                        <input type="text" class="form-control">
+		                        <input type="text" class="form-control" name="temperatures">
 		                        <div class="input-group-append">
 		                          <button class="btn">°C</button>
 		                        </div>
 		                    </div>
 							<div class="input-group col-3">
-		                        <input type="text" class="form-control">
+		                        <input type="text" class="form-control" name="precipitation">
 		                        <div class="input-group-append">
 		                          <button class="btn">mm</button>
 		                        </div>
 		                    </div>
 							<div class="input-group col-3">
-		                        <input type="text" class="form-control">
+		                        <input type="text" class="form-control" name="windSpeed">
 		                        <div class="input-group-append">
 		                          <button class="btn">km/h</button>
 		                        </div>
@@ -91,8 +91,8 @@
 						<div class=" mt-4 d-flex justify-content-end">	
 							<button type="submit" class="btn btn-success">저장</button>
 						</div>
-					</form>
-				</div>
+				</form>
+			</div>
 		</section>
 		<footer class="d-flex mt-3">
 			<div class="d-flex align-items-center">
@@ -105,5 +105,7 @@
 
 </body>
 </html>
+									
+						
 					
 					

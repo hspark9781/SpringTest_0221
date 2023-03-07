@@ -24,4 +24,37 @@
   		
   </select>
   
+  
+  <insert id="insertWeatherhistoryByObject" parameterType="com.hsp.spring.test.jstl.model.Weatherhistory"
+  useGeneratedKeys="true" keyProperty="id">
+  
+  INSERT INTO
+  		`weatherhistory`
+  (
+  		 `date`
+  		, `weather`
+  		, `temperatures`
+  		, `precipitation`
+  		, `microDust`
+  		, `windSpeed`
+  		, `createdAt`
+  		, `updatedAt`
+  )
+  
+  VALUE
+  (
+  	#{date}
+  	, #{weather}
+  	, #{temperatures}
+  	, #{precipitation}
+  	, #{microDust}
+  	, #{windSpeed}
+  	, now()
+  	, now()
+  )
+  
+  
+  
+  </insert>
+  
   </mapper>

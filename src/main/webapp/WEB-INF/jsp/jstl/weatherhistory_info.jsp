@@ -27,7 +27,7 @@
 						<a class="nav-link font-weight-bold text-light" href="#">날씨</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link font-weight-bold text-light" href="/weatherhistory/input">날씨입력</a>
+						<a class="nav-link font-weight-bold text-light" href="/jstl/weatherhistory/input">날씨입력</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold text-light" href="#">테마날씨</a>
@@ -70,7 +70,7 @@
 									<td> <img alt="맑음 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg"> </td>
 								</c:when>
 								<c:otherwise>
-									<td> <img alt="구름 조금 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg"> </td>
+									<td> <img alt="구름 조금 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/partlyCloudy.jpg"> </td>
 								</c:otherwise>
 							</c:choose>
 							<td>${weatherhistory.temperatures }</td>

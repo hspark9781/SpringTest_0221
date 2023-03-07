@@ -10,4 +10,6 @@ import com.hsp.spring.test.jstl.model.Weatherhistory;
 public interface WeatherhistoryDAO {
 
 	public List<Weatherhistory> selectWeatherhistory();
+	
+	public int insertWeatherhistoryByObject(Weatherhistory weatherhistory);
 }
