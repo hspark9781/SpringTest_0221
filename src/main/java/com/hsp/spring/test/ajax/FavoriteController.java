@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hsp.spring.test.ajax.bo.FavoriteBO;
 import com.hsp.spring.test.ajax.model.Favorite;
@@ -31,6 +32,7 @@ public class FavoriteController {
 	}
 	
 	@GetMapping("/add")
+	@ResponseBody
 	public Map<String, String> addFavorite(
 			@RequestParam("name") String name
 			, @RequestParam("url") String url
