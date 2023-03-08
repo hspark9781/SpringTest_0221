@@ -11,11 +11,32 @@
   			`id`
   			, `name`
   			, `url`
-  			, `createdAt
+  			, `createdAt`
   			, `updatedAt`
   		FROM
   			`favorite`
   	
   	</select>
+  	
+  	
+  	<insert id="insertFavorite" parameterType="map">
+  		INSERT INTO
+  			`favorite`
+  		(
+  			`name`
+  			, `url`
+  			, `createdAt`
+  			, `updatedAt`
+  		
+  		)
+  		VALUE
+  		(
+  			#{name}
+  			, #{url}
+  			, now()
+  			, now()
+  		)
+  		
+  	</insert>
   
   </mapper>
