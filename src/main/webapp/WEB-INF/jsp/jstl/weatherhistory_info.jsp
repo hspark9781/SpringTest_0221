@@ -73,10 +73,10 @@
 									<td> <img alt="구름 조금 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/partlyCloudy.jpg"> </td>
 								</c:otherwise>
 							</c:choose>
-							<td>${weatherhistory.temperatures }</td>
-							<td>${weatherhistory.precipitation }</td>
+							<td>${weatherhistory.temperatures }°C</td>
+							<td>${weatherhistory.precipitation }mm</td>
 							<td>${weatherhistory.microDust }</td>
-							<td>${weatherhistory.windSpeed }</td>
+							<td>${weatherhistory.windSpeed }km/h</td>
 						</tr>
 					</c:forEach>
 					</tbody>				
