@@ -69,8 +69,11 @@
 								<c:when test="${weatherhistory.weather eq '맑음' }">
 									<td> <img alt="맑음 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg"> </td>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${weatherhistory.weather eq '구름조금' }">
 									<td> <img alt="구름 조금 이미지" src="http://marondal.com/material/images/dulumary/web/jstl/partlyCloudy.jpg"> </td>
+								</c:when>
+								<c:otherwise>
+								 	${weatherhistory.weather }
 								</c:otherwise>
 							</c:choose>
 							<td>${weatherhistory.temperatures }°C</td>

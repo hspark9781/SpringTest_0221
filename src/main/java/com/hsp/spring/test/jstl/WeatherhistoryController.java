@@ -45,6 +45,7 @@ public class WeatherhistoryController {
 		weatherhistory.setDate(date);
 		weatherhistory.setWeather(weather);
 		weatherhistory.setTemperatures(temperatures);
+		weatherhistory.setPrecipitation(precipitation);
 		weatherhistory.setMicroDust(microDust);
 		weatherhistory.setWindSpeed(windSpeed);
 		
