@@ -54,7 +54,7 @@ public class WeatherhistoryController {
 		
 		
 		
-		return "jstl/weatherhistory_info";
+		return "redirect:info";
 	}
 //	private Date date;
 //	private  String weather;
