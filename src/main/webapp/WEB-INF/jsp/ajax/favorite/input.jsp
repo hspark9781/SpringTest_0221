@@ -13,20 +13,50 @@
 <body>
 	<div class="container">
 		<h2>즐겨 찾기 추가하기</h2>
-		<div>
-			<label>제목</label> <br>
+			<label>제목</label>
 			<input type="text" class="form-control col-5" name="name" id="nameInput">
-		</div>
-		<div>
-			<label>주소</label> <br>
-			<input type="text" class="form-control col-5" name="url" id="urlInput">
-		</div>
-		
+			<label class="mt-3">주소</label> 
+			<div class="d-flex">
+				<input type="text" class="form-control col-5" name="url" id="urlInput"> <button type="button" id="duplicateBtn" class="btn btn-info ml-2">중복확인</button>
+			</div>
+			<div id="duplicate_true" class="small text-danger d-none">중복된 url 입니다.</div>
+			<div id="duplicate_false" class="small text-danger d-none">사용 가능한 url 입니다.</div>
 		<button type="submit" class="btn btn-success col-5 mt-3" id="addBtn">추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function() {
+			
+			$("#duplicateBtn").on("click", function() {
+				let url = $("#urlInput").val();
+				if(url == "") {
+					alert("주소를 입력하세요.");
+					return;
+				} 
+				
+				$.ajax({
+					type:"post"
+					, url:"/ajax/favorite/is_duplicate"
+					, data:{"url":url}
+					, success:function(data) {
+						if(data.is_duplicate) {
+							alert("중복되었습니다.");
+							$("#duplicate_true").removeClass("d-none");
+							$("#duplicate_false").addClass("d-none");
+						} else {
+							alert("사용 가능한 주소 입니다.");
+							$("#duplicate_false").removeClass("d-none");
+							$("#duplicate_true").addClass("d-none");
+						}
+					}
+					, error:function() {
+						alert("중복확인 에러");
+					}
+				});
+				
+			});
+			
+			
 			$("#addBtn").on("click", function() {
 				let name = $("#nameInput").val();
 				let url = $("#urlInput").val();
@@ -41,14 +71,14 @@
 					return;
 				} 
 				
-				if(url.startsWith("http://")) {
-					alert("https:// 로 입력해주세요.");
+				if(!url.startsWith("http://") && !url.startsWith("https://")) {
+					alert("주소 형식이 잘못되었습니다.");
 					return;
 				}
 				
 				
 				$.ajax({
-					type:"get"	
+					type:"post"	
 					, url:"/ajax/favorite/add"
 					, data:{"name":name, "url":url}
 					, success:function(data) {
@@ -66,6 +96,22 @@
 						alert("추가 에러");
 					}
 				});	
+				
+				$.ajax({
+					type:"post"
+					, url:"/ajax/favorite/is_duplicate"
+					, data:{"url":url}
+					, success:function(data) {
+						if(data.is_duplicate) {
+							alert("주소가 중복되었습니다.");
+						} else {
+							location.href = "/ajax/favorite/list";
+						}
+					}
+					, error:function() {
+						alert("중복확인 이후 추가 에러");
+					}
+				});
 				
 			});
 			
