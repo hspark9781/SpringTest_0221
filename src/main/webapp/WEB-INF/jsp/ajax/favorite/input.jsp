@@ -76,30 +76,45 @@
 					return;
 				}
 				
-				
 				$.ajax({
-					type:"post"	
-					, url:"/ajax/favorite/add"
-					, data:{"name":name, "url":url}
+					type:"post"
+					, url:"/ajax/favorite/is_duplicate"
+					, data:{"url":url}
 					, success:function(data) {
-						// 성공 : {"result":"success" }
-						// 실패 : {"result":"fail"}
-						if(data.result == "success") {
-							// 리스트 페이지로 이동
-							location.href = "/ajax/favorite/list";
+						if(data.is_duplicate) {
+							alert("이메일이 중복되었습니다.");
 						} else {
-							alert("추가 실패");
+							$.ajax({
+								type:"post"	
+								, url:"/ajax/favorite/add"
+								, data:{"name":name, "url":url}
+								, success:function(data) {
+									if(data.result == "success") {
+										location.href = "/ajax/favorite/list";
+									} else {
+										alert("추가 실패");
+									}
+								}
+								, error:function() {
+									alert("추가 에러");
+								}
+							})		
 						}
-						
 					}
 					, error:function() {
-						alert("추가 에러");
+						alert("중복확인 에러");
 					}
-				});	
+				});
 			});
 			
 		});
 	</script>
+									
+				
+				
+				
+				
+				
 	
 	
 	
