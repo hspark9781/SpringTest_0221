@@ -96,23 +96,6 @@
 						alert("추가 에러");
 					}
 				});	
-				
-				$.ajax({
-					type:"post"
-					, url:"/ajax/favorite/is_duplicate"
-					, data:{"url":url}
-					, success:function(data) {
-						if(data.is_duplicate) {
-							alert("주소가 중복되었습니다.");
-						} else {
-							location.href = "/ajax/favorite/list";
-						}
-					}
-					, error:function() {
-						alert("중복확인 이후 추가 에러");
-					}
-				});
-				
 			});
 			
 		});
@@ -123,3 +106,6 @@
 
 </body>
 </html>
+				
+				
+				
