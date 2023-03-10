@@ -70,13 +70,32 @@ public class FavoriteController {
 		
 		Map<String, Boolean> resultMap = new HashMap<>();
 		
-		if(favoriteBO.isDuplicate(url)) {
-			resultMap.put("is_duplicate", true);
+//		if(favoriteBO.isDuplicate(url)) {
+//			resultMap.put("is_duplicate", true);
+//		} else {
+//			resultMap.put("is_duplicate", false);
+//		}
+		
+		resultMap.put("is_duplicate", favoriteBO.isDuplicate(url));
+		
+		return resultMap;
+	}
+	
+	@GetMapping("/delete")
+	@ResponseBody
+	public Map<String, String>  deleteFavorite(@RequestParam("id") int id) {
+		
+		int count = favoriteBO.isDelete(id);
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(count == 1) {
+			resultMap.put("result", "success");
 		} else {
-			resultMap.put("is_duplicate", false);
+			resultMap.put("result", "fail");
 		}
 		
 		return resultMap;
+		
 	}
 	
 	// json형태의 데이터가 자바스크립트 객체로 변환 가능

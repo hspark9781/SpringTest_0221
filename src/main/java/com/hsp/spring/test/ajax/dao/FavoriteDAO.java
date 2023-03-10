@@ -19,4 +19,7 @@ public interface FavoriteDAO {
 	
 	public int selectDuplicateUrl(String url);
 	
+	public int deleteFavorite(@Param("id") int id);
+	
+	
 }

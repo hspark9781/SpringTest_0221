@@ -27,12 +27,19 @@ public class FavoriteBO {
 		
 		int count = favoriteDAO.selectDuplicateUrl(url);
 		
-		if(count == 0) {
-			return false;
-		} else {
-			return true;
-		}
+//		if(count == 0) {
+//			return false;
+//		} else {
+//			return true;
+//		}
 		
+		return count != 0;
+		
+	}
+	
+	
+	public int isDelete(int id) {
+		return favoriteDAO.deleteFavorite(id);
 	}
 	
 }

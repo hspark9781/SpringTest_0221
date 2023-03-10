@@ -20,6 +20,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,11 +29,49 @@
 					<td>${status.count }</td>
 					<td>${favorite.name }</td>
 					<td>${favorite.url }</td>
+					<td> <button type="button" class="btn btn-danger delete-btn" data-favorite-id="${favorite.id }">삭제</button> </td>
+																				<%-- data-: 단어구분은 -로만, 소문자만 가능 --%>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	
+	<script>
+	$(document).ready(function() {
+		$(".delete-btn").on("click", function() {
+			
+			// (객체화)삭제 대상의 id
+			let id = $(this).data("favorite-id");
+			// ajax를 통해서 api 호출
+			
+			$.ajax({
+				type:"get"
+				, url:"/ajax/favorite/delete"
+				, data:{"id":id}
+				, suucess:function(data) {
+					if(data.result = "success") {
+						 location.reload(); 
+					} else {
+						alert("삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("삭제에러");
+				}
+				
+				
+				
+			});
+		});
+		
+		
+		
+		
+	});
+	
+	</script>
 
 	
 

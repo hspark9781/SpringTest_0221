@@ -20,12 +20,22 @@
 				<input type="text" class="form-control col-5" name="url" id="urlInput"> <button type="button" id="duplicateBtn" class="btn btn-info ml-2">중복확인</button>
 			</div>
 			<div id="duplicate_true" class="small text-danger d-none">중복된 url 입니다.</div>
-			<div id="duplicate_false" class="small text-danger d-none">사용 가능한 url 입니다.</div>
+			<div id="duplicate_false" class="small text-success d-none">사용 가능한 url 입니다.</div>
 		<button type="submit" class="btn btn-success col-5 mt-3" id="addBtn">추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function() {
+			
+			var isChecked = false;
+			var isDuplicate = true; 
+			
+			$("#urlInput").on("input", function() {
+				isChecked = false;
+				isDuplicate = true; 
+				$("#duplicate_true").addClass("d-none");
+				$("#duplicate_false").addClass("d-none");
+			});
 			
 			$("#duplicateBtn").on("click", function() {
 				let url = $("#urlInput").val();
@@ -39,14 +49,18 @@
 					, url:"/ajax/favorite/is_duplicate"
 					, data:{"url":url}
 					, success:function(data) {
+						isChecked = true;
+						
 						if(data.is_duplicate) {
-							alert("중복되었습니다.");
 							$("#duplicate_true").removeClass("d-none");
 							$("#duplicate_false").addClass("d-none");
+							
+							isDuplicate = true;
 						} else {
-							alert("사용 가능한 주소 입니다.");
 							$("#duplicate_false").removeClass("d-none");
 							$("#duplicate_true").addClass("d-none");
+							
+							isDuplicate = false;
 						}
 					}
 					, error:function() {
@@ -76,7 +90,33 @@
 					return;
 				}
 				
+				if(!isChecked) {
+					alert("중복체크를 진행해주세요.");
+					return;
+				}
+				
+				if(isDuplicate) {
+					alert("중복된 url입니다.");
+					return;
+				}  
+				
 				$.ajax({
+					type:"post"	
+					, url:"/ajax/favorite/add"
+					, data:{"name":name, "url":url}
+					, success:function(data) {
+						if(data.result = "success") {
+							location.href = "/ajax/favorite/list";
+						} else {
+							alert("추가 실패");
+						}
+					}
+					, error:function() {
+						alert("추가 에러");
+					}
+				}); 
+				
+				/* $.ajax({
 					type:"post"
 					, url:"/ajax/favorite/is_duplicate"
 					, data:{"url":url}
@@ -98,13 +138,14 @@
 								, error:function() {
 									alert("추가 에러");
 								}
-							})		
+							});		
 						}
 					}
 					, error:function() {
 						alert("중복확인 에러");
 					}
-				});
+				}); */ 
+				
 			});
 			
 		});
