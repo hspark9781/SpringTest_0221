@@ -66,7 +66,7 @@
 		                			<td>${booking.state }</td>
 		                			</c:otherwise>
 	                			</c:choose>
-	                			<td> <button type="button" class="btn btn-danger delete-btn" data-booking-id="${booking.id }">삭제 ${booking.id }</button> </td>
+	                			<td> <button type="button" class="btn btn-danger delete-btn" data-booking-id="${booking.id }">삭제</button> </td>
 	                		</tr>
 	                	</c:forEach>
 	                	</tbody>
@@ -84,25 +84,25 @@
 	<script>
 	$(document).ready(function() {
 		$(".delete-btn").on("click", function() {
-			
-			let id = $(this).data("booking-id");
+			// 삭제 버튼에 해당하는 행의 id를 얻어온다.
+			let bookingId = $(this).data("booking-id");
 			
 			$.ajax({
 				type:"get"
 				, url:"/ajax/pension/delete"
-				, data:{"id":id}
-				, suucess:function(data) {
-					if(data.result = "success") {
-						alert(id + "삭제");
+				, data:{"id":bookingId}
+				, success:function(data) {
+					if(data.result == "success") {
 						location.reload();
 					} else {
 						alert("삭제 실패");
 					}
 				}
 				, error:function() {
-					alert("삭제에러");
+					alert("삭제 에러");
 				}
 			});
+			
 		});
 	});
 	

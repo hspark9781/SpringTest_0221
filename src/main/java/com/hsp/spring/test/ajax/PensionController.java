@@ -79,7 +79,7 @@ public class PensionController {
 	@ResponseBody
 	public Map<String, String> deleteBooking(@RequestParam("id") int id) {
 		
-		int count = pensionBO.isDelete(id);
+		int count = pensionBO.deleteBooking(id);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		

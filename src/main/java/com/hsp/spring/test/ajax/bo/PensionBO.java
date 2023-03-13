@@ -31,7 +31,7 @@ public class PensionBO {
 		return pensionDAO.insertBooking(name, headcount, day, date, phoneNumber, "대기중");
 	}
 	
-	public int isDelete(int id) {
+	public int deleteBooking(int id) {
 		return pensionDAO.deleteBooking(id);
 	}
 	
