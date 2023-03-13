@@ -83,7 +83,7 @@
 		$(".delete-btn").on("click", function() {
 			
 			let id = $(this).data("booking-id");
-			
+			alert("");
 			$.ajax({
 				type:"get"
 				, url:"/ajax/pension/delete"

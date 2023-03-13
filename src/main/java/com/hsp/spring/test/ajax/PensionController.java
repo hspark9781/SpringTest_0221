@@ -77,7 +77,7 @@ public class PensionController {
 	
 	@GetMapping("/delete")
 	@ResponseBody
-	public Map<String, String>  deleteBooking(@RequestParam("id") int id) {
+	public Map<String, String> deleteBooking(@RequestParam("id") int id) {
 		
 		int count = pensionBO.isDelete(id);
 		Map<String, String> resultMap = new HashMap<>();
