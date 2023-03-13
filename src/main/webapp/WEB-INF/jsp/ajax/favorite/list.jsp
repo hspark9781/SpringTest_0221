@@ -13,8 +13,11 @@
 </head>
 <body>
 	<div class="container">
-		<h2>즐겨 찾기 목록</h2>
-		<table class="table">
+	
+		<h2>즐겨찾기 목록</h2>
+		
+		<table class="table text-center">
+		
 			<thead>
 				<tr>
 					<th>No.</th>
@@ -23,57 +26,56 @@
 					<th></th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<c:forEach var="favorite" items="${favoriteList }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
 					<td>${favorite.name }</td>
 					<td>${favorite.url }</td>
-					<td> <button type="button" class="btn btn-danger delete-btn" data-favorite-id="${favorite.id }">삭제</button> </td>
-																				<%-- data-: 단어구분은 -로만, 소문자만 가능 --%>
+					<td><button type="button" class="btn btn-danger btn-sm delete-btn" data-favorite-id="${favorite.id }">삭제</button></td>
 				</tr>
 				</c:forEach>
+				
+				
 			</tbody>
+		
 		</table>
+	
 	</div>
 	
-	
 	<script>
-	$(document).ready(function() {
-		$(".delete-btn").on("click", function() {
-			
-			// (객체화)삭제 대상의 id
-			let id = $(this).data("favorite-id");
-			// ajax를 통해서 api 호출
-			
-			$.ajax({
-				type:"get"
-				, url:"/ajax/favorite/delete"
-				, data:{"id":id}
-				, suucess:function(data) {
-					if(data.result = "success") {
-						 location.reload(); 
-					} else {
-						alert("삭제 실패");
+		$(document).ready(function() {
+			$(".delete-btn").on("click", function() {
+				
+				// 삭제 대상의 id 
+				let id = $(this).data("favorite-id");
+				
+				// ajax를 통해서 delete api 호출
+				$.ajax({
+					type:"get"
+					, url:"/ajax/favorite/delete"
+					, data:{"id":id}
+					, success:function(data) {
+						// 성공 : {"result":"success"}
+						// 	실패 : {"result":"fail"}
+						if(data.result = "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패");
+						}
+						
 					}
-				}
-				, error:function() {
-					alert("삭제에러");
-				}
-				
-				
+					, error:function() {
+						alert("삭제 에러");
+					}
+					
+				});
 				
 			});
 		});
-		
-		
-		
-		
-	});
 	
 	</script>
-
-	
 
 </body>
 </html>

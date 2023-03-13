@@ -39,15 +39,15 @@ public class PensionController {
 	}
 	
 	
-	@GetMapping("/list")
+	@GetMapping("/list") // 브라우저 경로
 	public String list(Model model) {
 		
-		List<Booking> booking = pensionBO.getBookingList();
+		List<Booking> bookingList = pensionBO.getBookingList();
 		
-		model.addAttribute("bookingList", booking);
+		model.addAttribute("bookingList", bookingList);
 		
 		
-		return  "ajax/pension/list";
+		return  "ajax/pension/list"; // jsp 경로
 	}
 	
 	@GetMapping("/add")
@@ -80,6 +80,7 @@ public class PensionController {
 	public Map<String, String> deleteBooking(@RequestParam("id") int id) {
 		
 		int count = pensionBO.isDelete(id);
+		
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(count == 1) {
@@ -91,5 +92,6 @@ public class PensionController {
 		return resultMap;
 		
 	}
+	
 
 }

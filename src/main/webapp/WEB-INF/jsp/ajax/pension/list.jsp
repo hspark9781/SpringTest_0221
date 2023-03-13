@@ -59,11 +59,14 @@
 		                			<c:when test="${booking.state eq '확정' }">
 		                			<td class="text-success">${booking.state }</td>
 		                			</c:when>
+		                			<c:when test="${booking.state eq '취소' }">
+		                			<td class="text-danger">${booking.state }</td>
+		                			</c:when>
 		                			<c:otherwise>
 		                			<td>${booking.state }</td>
 		                			</c:otherwise>
 	                			</c:choose>
-	                			<td> <button type="button" class="btn btn-danger delete-btn" data-booking-id="${booking.id }">삭제</button> </td>
+	                			<td> <button type="button" class="btn btn-danger delete-btn" data-booking-id="${booking.id }">삭제 ${booking.id }</button> </td>
 	                		</tr>
 	                	</c:forEach>
 	                	</tbody>
@@ -83,14 +86,15 @@
 		$(".delete-btn").on("click", function() {
 			
 			let id = $(this).data("booking-id");
-			alert("");
+			
 			$.ajax({
 				type:"get"
 				, url:"/ajax/pension/delete"
 				, data:{"id":id}
 				, suucess:function(data) {
 					if(data.result = "success") {
-						 location.reload(); 
+						alert(id + "삭제");
+						location.reload();
 					} else {
 						alert("삭제 실패");
 					}
@@ -98,19 +102,20 @@
 				, error:function() {
 					alert("삭제에러");
 				}
-				
-				
-				
 			});
 		});
-		
-		
-		
-		
 	});
 	
 	</script>
 
 </body>
 </html>
+				
+				
+				
+			
+		
+		
+		
+		
 	                			

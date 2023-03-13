@@ -12,101 +12,126 @@
 </head>
 <body>
 	<div class="container">
-		<h2>즐겨 찾기 추가하기</h2>
-			<label>제목</label>
-			<input type="text" class="form-control col-5" name="name" id="nameInput">
-			<label class="mt-3">주소</label> 
-			<div class="d-flex">
-				<input type="text" class="form-control col-5" name="url" id="urlInput"> <button type="button" id="duplicateBtn" class="btn btn-info ml-2">중복확인</button>
-			</div>
-			<div id="duplicate_true" class="small text-danger d-none">중복된 url 입니다.</div>
-			<div id="duplicate_false" class="small text-success d-none">사용 가능한 url 입니다.</div>
-		<button type="submit" class="btn btn-success col-5 mt-3" id="addBtn">추가</button>
+		<h1>즐겨 찾기 추가하기</h1>
+		<label>제목</label>
+		<input type="text" class="form-control" id="nameInput">
+		<label class="mt-3">주소</label>
+		<div class="d-flex">
+			<input type="text" class="form-control" id="urlInput">
+			<button type="button" class="btn btn-info" id="duplicateBtn">중복확인</button>
+		</div>
+		<div class="small text-danger d-none" id="duplicateText">중복된 url 입니다</div>
+		<div class="small text-success d-none" id="availableText">저장 가능한 url 입니다</div>
+		<button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function() {
 			
 			var isChecked = false;
-			var isDuplicate = true; 
+			var isDuplicate = true;
+			
 			
 			$("#urlInput").on("input", function() {
 				isChecked = false;
-				isDuplicate = true; 
-				$("#duplicate_true").addClass("d-none");
-				$("#duplicate_false").addClass("d-none");
+				isDuplicate = true;
+				$("#duplicateText").addClass("d-none");
+				$("#availableText").addClass("d-none");
 			});
 			
 			$("#duplicateBtn").on("click", function() {
 				let url = $("#urlInput").val();
+				
 				if(url == "") {
-					alert("주소를 입력하세요.");
-					return;
-				} 
+					alert("주소를 입력하세요");
+					return ;
+				}
+				
+				// http로 시작하지 않고 https 로 시작하지도 않으면 경고창을 띄워라
+				// http://naver.com
+				if(!url.startsWith("http://") && !url.startsWith("https://")) {
+					alert("주소 형식이 잘못되었습니다");
+					return ;
+				}
+				
 				
 				$.ajax({
 					type:"post"
 					, url:"/ajax/favorite/is_duplicate"
 					, data:{"url":url}
 					, success:function(data) {
+						
+						// 중복체크 여부 저장
 						isChecked = true;
 						
+						// 중복된 경우 : {"is_duplicate":true}
+						// 중복이 안된 경우 : {"is_duplicate":false}
 						if(data.is_duplicate) {
-							$("#duplicate_true").removeClass("d-none");
-							$("#duplicate_false").addClass("d-none");
+							$("#duplicateText").removeClass("d-none");
+							$("#availableText").addClass("d-none");
 							
 							isDuplicate = true;
 						} else {
-							$("#duplicate_false").removeClass("d-none");
-							$("#duplicate_true").addClass("d-none");
+							$("#availableText").removeClass("d-none");
+							$("#duplicateText").addClass("d-none");
 							
 							isDuplicate = false;
 						}
 					}
 					, error:function() {
+						
 						alert("중복확인 에러");
 					}
 				});
 				
 			});
 			
-			
 			$("#addBtn").on("click", function() {
 				let name = $("#nameInput").val();
 				let url = $("#urlInput").val();
 				
 				if(name == "") {
-					alert("제목을 입력하세요.");
-					return;
+					alert("이름을 입력하세요");
+					return ;
 				}
 				
 				if(url == "") {
-					alert("주소를 입력하세요.");
-					return;
-				} 
+					alert("주소를 입력하세요");
+					return ;
+				}
 				
+				// http로 시작하지 않고 https 로 시작하지도 않으면 경고창을 띄워라
+				// http://naver.com
 				if(!url.startsWith("http://") && !url.startsWith("https://")) {
-					alert("주소 형식이 잘못되었습니다.");
-					return;
+					alert("주소 형식이 잘못되었습니다");
+					return ;
 				}
 				
+				// 중복체크가 되지 않은 경우 
+				//if(isChecked == false) {
 				if(!isChecked) {
-					alert("중복체크를 진행해주세요.");
-					return;
+					alert("중복체크를 진행해주세요");
+					return ;
 				}
 				
+				// 중복된 url인 경우 
 				if(isDuplicate) {
-					alert("중복된 url입니다.");
-					return;
-				}  
+					alert("중복된 url 입니다");
+					return ;
+				}
 				
+				///ajax/favorite/add?name=네이버&url=https://naver.com
 				$.ajax({
-					type:"post"	
+					type:"post"
 					, url:"/ajax/favorite/add"
-					, data:{"name":name, "url":url}
+					, data:{"name":name, "url":url }
 					, success:function(data) {
-						if(data.result = "success") {
+						// 성공 : {"result":"success"}
+						// 실패 : {"result":"fail"}
+					
+						if(data.result == "success") {
 							location.href = "/ajax/favorite/list";
+							
 						} else {
 							alert("추가 실패");
 						}
@@ -114,52 +139,14 @@
 					, error:function() {
 						alert("추가 에러");
 					}
-				}); 
-				
-				/* $.ajax({
-					type:"post"
-					, url:"/ajax/favorite/is_duplicate"
-					, data:{"url":url}
-					, success:function(data) {
-						if(data.is_duplicate) {
-							alert("이메일이 중복되었습니다.");
-						} else {
-							$.ajax({
-								type:"post"	
-								, url:"/ajax/favorite/add"
-								, data:{"name":name, "url":url}
-								, success:function(data) {
-									if(data.result == "success") {
-										location.href = "/ajax/favorite/list";
-									} else {
-										alert("추가 실패");
-									}
-								}
-								, error:function() {
-									alert("추가 에러");
-								}
-							});		
-						}
-					}
-					, error:function() {
-						alert("중복확인 에러");
-					}
-				}); */ 
+				});
 				
 			});
 			
+			
 		});
+	
 	</script>
-									
-				
-				
-				
-				
-				
-	
-	
-	
-
 </body>
 </html>
 				

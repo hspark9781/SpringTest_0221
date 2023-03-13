@@ -17,12 +17,18 @@ public class PensionBO {
 	
 	
 	public List<Booking> getBookingList() {
-		return pensionDAO.selectAllBooking();
+		return pensionDAO.selectBookingList();
 	}
 	
 	
-	public int addBooking(String name, int headcount, int day, Date date, String phoneNumber) {
-		return pensionDAO.insertBooking(name, headcount, day, date, phoneNumber);
+	public int addBooking(
+			String name
+			, int headcount
+			, int day
+			, Date date
+			, String phoneNumber) {
+		
+		return pensionDAO.insertBooking(name, headcount, day, date, phoneNumber, "대기중");
 	}
 	
 	public int isDelete(int id) {

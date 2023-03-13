@@ -10,14 +10,13 @@ import com.hsp.spring.test.ajax.model.Favorite;
 @Repository
 public interface FavoriteDAO {
 
-	public List<Favorite> selectFavorite();
+public List<Favorite> selectFavoriteList();
 	
 	public int insertFavorite(
 			@Param("name") String name
 			, @Param("url") String url);
-	
-	
-	public int selectDuplicateUrl(String url);
+
+	public int selectCountUrl(@Param("url") String url);
 	
 	public int deleteFavorite(@Param("id") int id);
 	

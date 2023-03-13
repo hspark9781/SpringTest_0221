@@ -11,7 +11,7 @@ import com.hsp.spring.test.ajax.model.Booking;
 @Repository
 public interface PensionDAO {
 	
-	public List<Booking> selectAllBooking();
+	public List<Booking> selectBookingList();
 	
 	
 	public int insertBooking(
@@ -19,7 +19,8 @@ public interface PensionDAO {
 			, @Param("headcount") int headcount
 			, @Param("day") int day
 			, @Param("date") Date date
-			, @Param("phoneNumber") String phoneNumber);
+			, @Param("phoneNumber") String phoneNumber
+			, @Param("state") String state);
 	
 	public int deleteBooking(@Param("id") int id);
 

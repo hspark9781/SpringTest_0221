@@ -24,70 +24,74 @@ public class FavoriteController {
 	
 	@GetMapping("/list")
 	public String favoriteList(Model model) {
+		
 		List<Favorite> favoriteList = favoriteBO.getFavoriteList();
 		
 		model.addAttribute("favoriteList", favoriteList);
 		
 		return "ajax/favorite/list";
-		
 	}
 	
+	@GetMapping("/input")
+	public String favoriteInput() {
+		return "ajax/favorite/input";
+	}
 	
-	// 사이트 이름과 주소를 전달 받고, 데이터를 저장
-	// api는 데이터를 저장하고 response에 어떤 타입으로 전달할지 정한다. 
-	// 성공 실패 여부를 response로 전달한다.
+	/// 사이트 이름과 주소를 전달 받고, 데이터를 저장
+	//  성공 실패 여부를 response로 전달한다. 
 	@PostMapping("/add")
 	@ResponseBody
 	public Map<String, String> addFavorite(
 			@RequestParam("name") String name
-			, @RequestParam("url") String url
-			, Model model) {
+			, @RequestParam("url") String url) {
 		
 		int count = favoriteBO.addFavorite(name, url);
 		
+		// 성공 : {"result":"success"}
+		// 실패 : {"result":"fail"}
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(count ==  1) {
+		if(count == 1) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
 		}
+		
 		return resultMap;
-		
 	}
 	
-	
-	@GetMapping("/input") 
-		public String input() {
-			return "ajax/favorite/input";
-		
-	}
-	
+	// 즐겨찾기 주소를 전달 받고, 해당 주소가 중복되었는지 확인한다. 
+	// 중복여부를 response로 전달한다. 
 	@PostMapping("/is_duplicate")
 	@ResponseBody
-	public Map<String, Boolean> isDuplicate(@RequestParam("url") String url) {
+	public Map<String, Boolean> isDuplicateUrl(@RequestParam("url") String url) {
 		
+		// 중복된 경우 : {"is_duplicate":true}
+		// 중복이 안된 경우 : {"is_duplicate":false}
 		
 		Map<String, Boolean> resultMap = new HashMap<>();
 		
-//		if(favoriteBO.isDuplicate(url)) {
+//		if(favoriteBO.isDuplicateUrl(url)) {
 //			resultMap.put("is_duplicate", true);
 //		} else {
 //			resultMap.put("is_duplicate", false);
 //		}
 		
-		resultMap.put("is_duplicate", favoriteBO.isDuplicate(url));
-		
+		resultMap.put("is_duplicate", favoriteBO.isDuplicateUrl(url));
+
 		return resultMap;
+		
 	}
 	
 	@GetMapping("/delete")
 	@ResponseBody
-	public Map<String, String>  deleteFavorite(@RequestParam("id") int id) {
+	public Map<String, String> deleteFavorite(@RequestParam("id") int id) {
 		
-		int count = favoriteBO.isDelete(id);
+		int count = favoriteBO.deleteFavorite(id);
+		// 성공 : {"result":"success"}
+		// 	실패 : {"result":"fail"}
+		
 		Map<String, String> resultMap = new HashMap<>();
-		
 		if(count == 1) {
 			resultMap.put("result", "success");
 		} else {

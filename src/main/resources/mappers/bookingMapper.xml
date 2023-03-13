@@ -7,7 +7,7 @@
   
   <mapper namespace="com.hsp.spring.test.ajax.dao.PensionDAO">
   
-  <select id="selectAllBooking" resultType="com.hsp.spring.test.ajax.model.Booking">
+  <select id="selectBookingList" resultType="com.hsp.spring.test.ajax.model.Booking">
   
  	SELECT 
  		`id`
@@ -21,6 +21,9 @@
  		, `updatedAt`
  	FROM
  	 	`booking`
+ 	 ORDER BY
+ 	 	`id` DESC
+ 	 	
   
   </select>
   
@@ -33,6 +36,7 @@
  		, `day`
  		, `date`
  		, `phoneNumber`
+ 		, `state`
  		, `createdAt`
  		, `updatedAt`
   	)
@@ -44,6 +48,7 @@
 		, #{day}
 		, #{date}
 		, #{phoneNumber}
+		, #{state}
 		, now()
 		, now()
 	)  

@@ -6,58 +6,56 @@
   
   
   <mapper namespace="com.hsp.spring.test.ajax.dao.FavoriteDAO">
-  	<select id="selectFavorite" resultType="com.hsp.spring.test.ajax.model.Favorite">
-  		SELECT
-  			`id`
-  			, `name`
-  			, `url`
-  			, `createdAt`
-  			, `updatedAt`
-  		FROM
-  			`favorite`
-  	
-  	</select>
-  	
-  	
-  	<insert id="insertFavorite" parameterType="map">
-  		INSERT INTO
-  			`favorite`
-  		(
-  			`name`
-  			, `url`
-  			, `createdAt`
-  			, `updatedAt`
-  		
-  		)
-  		VALUE
-  		(
-  			#{name}
-  			, #{url}
-  			, now()
-  			, now()
-  		)
-  		
-  	</insert>
-  	
-  	
-  	<select id="selectDuplicateUrl" parameterType="string" resultType="int">
-  		SELECT
-  			count(1)
-  		FROM 
-  			`favorite`
-  		WHERE
-  			`url` = #{url}
-  	
-  	</select>
-  	
-  	
-  	<delete id="deleteFavorite" parameterType="int">
-  	DELETE FROM 
-  		`favorite`
-  	WHERE
-  		`id` = #{id}
-  	
-  	</delete>
+  	<select id="selectFavoriteList" resultType="com.hsp.spring.test.ajax.model.Favorite">
+	
+		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`favorite`
+	
+	</select>
+	
+	<insert id="insertFavorite" parameterType="map">
+		INSERT INTO
+			`favorite`
+		(
+			`name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE 
+		(
+			#{name}
+			, #{url}
+			, now()
+			, now()
+		)
+		
+	
+	</insert>
+	
+	<select id="selectCountUrl" parameterType="string" resultType="int">
+		SELECT 
+			count(1)
+		FROM 
+			`favorite`
+		WHERE 
+			`url` = #{url}
+	
+	</select>
+	
+	<delete id="deleteFavorite" parameterType="int">
+		DELETE FROM 
+			`favorite`
+		WHERE
+			`id` = #{id}
+	
+	</delete>
   	
   	
   	
