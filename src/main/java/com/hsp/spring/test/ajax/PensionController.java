@@ -93,5 +93,21 @@ public class PensionController {
 		
 	}
 	
+	
+	@GetMapping("/select")
+	@ResponseBody
+	public String selectBooking(
+			@RequestParam("name") String name
+			, @RequestParam("phoneNumber") String phoneNumber
+			, Model model) {
+		
+		Booking booking = new Booking();
+		booking.setName(name);
+		booking.setPhoneNumber(phoneNumber);
+		
+		model.addAttribute("booking", booking);
+		return "/ajax/pension/home";
+	}
+	
 
 }

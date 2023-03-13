@@ -35,4 +35,9 @@ public class PensionBO {
 		return pensionDAO.deleteBooking(id);
 	}
 	
+	
+	public Booking selectBooking(String name, String phoneNumber) {
+		return pensionDAO.selectBooking(name, phoneNumber);
+	}
+	
 }

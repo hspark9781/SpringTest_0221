@@ -62,6 +62,26 @@
 	  		`id` = #{id}
   	
   	</delete>
+  	
+  	
+  	<select id="selectBooking" parameterType="string" resultType="com.hsp.spring.test.ajax.model.Booking">
+	  	SELECT 
+	 		`id`
+	 		, `name`
+	 		, `headcount`
+	 		, `day`
+	 		, `date`
+	 		, `phoneNumber`
+	 		, `state`
+	 		, `createdAt`
+	 		, `updatedAt`
+	 	FROM
+	 	 	`booking`
+	 	WHERE
+	 	 	`name` = #{name} AND `phoneNumber` = #{phoneNumber}
+  	
+  	
+  	</select>
   
   
   </mapper>
