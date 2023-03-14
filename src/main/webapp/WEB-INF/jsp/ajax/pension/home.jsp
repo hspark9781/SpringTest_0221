@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mt-3 mr-5">
-                                <button type="button" id="selectBtn" class="mr-4 btn btn-success" data-booking-id="${booking.id }">조회하기</button>
+                                <button type="button" id="selectBtn" class="mr-4 btn btn-success">조회하기</button>
                             </div>
                         </div>
                     </div>
@@ -72,95 +72,40 @@
        </div>
        <script>
             $(document).ready(function() {
-                var index = 0;
-                var imageList = ["/pension_images/banner1.jpg", "/pension_images/banner2.jpg", "/pension_images/banner3.jpg" , "/pension_images/banner4.jpg"];
                 
-                $("#selectBtn").on("click", function() {
-                	let name = $("#nameInput").val();
-                	let phoneNumber = $("#phoneNumberInput").val();
-                	
-                	if(name == ${booking.name} && phoneNumber == ${booking.phoneNumber}) {
-                		alert("이름 : " + name
-                				+\n + "날짜 : " + ${booking.date});
-                	}
-                	
-                });
-                
-                
-                
-                
-                //setInterval
-                setInterval(function () {
-                    index++;
-                    if(index == imageList.length) {
-                        index = 0;
-                    }
-                    $("#images").attr("src",imageList[index]);
-                   }, 3000);
-
-                    // 유효성 검사
-                    $("#button").on("click", function() {
-                        let value = $("input[name='check']:checked").val();
-                        let text = $("#phoneNumber").val();
-                        if(value == "non-members") {
-                            if($("#nameInput").val() == "") {
-                                alert("이름을 입력하세요");
-                                return;
-                            }
-
-                            if($("#phoneNumber").val() == "") {
-                                alert("전화번호를 입력하세요");
-                                return;
-                            }
-
-                            if(text.startsWith("010") == false) {
-                                alert("010을 포함해서 입력해주세요.");
-                                return;
-                            }
-                            
-                            if($("#date").val() == "") {
-                                alert("날짜를 입력하세요");
-                                return;
-                            }
-                            alert("이름 : " + $("#nameInput").val() + 
-                                    "\n" + "전화번호" + $("#phoneNumber").val() + 
-                                    "\n" + "날짜" + $("#date").val() 
-                                )
-                        } else {
-                            if($("#idInput").val() == "") {
-                                alert("아이디를 입력하세요");
-                                return;
-                            }
-
-                            if($("#passwordInput").val() == "") {
-                                alert("비밀번호를 입력하세요");
-                                return;
-                            }
-                        }
-                    });
-                                
-                    // 날짜 오늘 이후 선택
-                    $("#date").datepicker({
-                        dateFormat: "yy"+"년 " + "mm" + "월 " + "dd" + "일",
-                        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                        yearSuffix: '년',
-                        showbButtonPanel:true,
-                        currentText: "Today",
-                        minDate:0
-                    });
-
-                    // 비회원 선택시
-                    $("input[name='check']").on("click", function() {
-                        let value = $(this).val(); //"input[name='check']:checked"
-                        if(value == "non-members") {
-                            $("#non-membersInput").removeClass("d-none");
-                            $("#membersInput").addClass("d-none");
-                        } else {
-                            $("#membersInput").removeClass("d-none");
-                            $("#non-membersInput").addClass("d-none");
-                        }
-                    });
+				$("#selectBtn").on("click", function() {
+					alert();
+					let name = $("#nameInput").val();
+					let phoneNumber = $("#phoneNumberInput").val();
+					
+					if(name == "") {
+						alert("이름을 입력하세요.");
+						return;
+					}
+					
+					if((phoneNumber == "전화번호를 입력하세요.") {
+						alert();
+						return;
+					}
+					
+					
+					$.ajax({
+    					type:"get"	
+    					, url:"/ajax/pension/select"
+    					, data:{"name":name, "phoneNumber":phoneNumber}
+    					, success:function(data) {
+    						if(data.name == name && data.phoneNumber == phoneNumber) {
+    							alert(data.name + " " data.date + " " + data.day + " " + data.count + " " + data.state);
+    						} else {
+    							alert("일치하는 정보가 없습니다.");
+    						}
+    					}
+    					, error:function() {
+    						alert("조회 에러");
+    					}
+    				}); 
+				});
+     
             });
         </script>
 

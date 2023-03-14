@@ -96,17 +96,22 @@ public class PensionController {
 	
 	@GetMapping("/select")
 	@ResponseBody
-	public String selectBooking(
+	public Map<String, Object> selectBooking(
 			@RequestParam("name") String name
-			, @RequestParam("phoneNumber") String phoneNumber
-			, Model model) {
+			, @RequestParam("phoneNumber") String phoneNumber) {
 		
 		Booking booking = new Booking();
-		booking.setName(name);
-		booking.setPhoneNumber(phoneNumber);
+		booking = pensionBO.selectBooking(name, phoneNumber);
 		
-		model.addAttribute("booking", booking);
-		return "/ajax/pension/home";
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("name", name);
+		result.put("date", booking.getDate());
+		result.put("date", booking.getDay());
+		result.put("count", booking.getHeadcount());
+		result.put("state", booking.getState());
+		
+		return result;
 	}
 	
 
