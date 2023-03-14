@@ -94,25 +94,26 @@ public class PensionController {
 	}
 	
 	
-	@GetMapping("/select")
+	@GetMapping("/search")
 	@ResponseBody
-	public Map<String, Object> selectBooking(
+	public Map<String, Object> searchBooking(
 			@RequestParam("name") String name
 			, @RequestParam("phoneNumber") String phoneNumber) {
 		
-		Booking booking = new Booking();
-		booking = pensionBO.selectBooking(name, phoneNumber);
+		Booking booking = pensionBO.searchBooking(name, phoneNumber);
+//		조회 성공 : {"result":"success", "info":booking}
+//		조회 실패 : {"result":"fail"}
+		Map<String, Object> resultMap = new HashMap<>();
+		if(booking != null) {
+			resultMap.put("result", "success");
+			resultMap.put("info", booking);
+		} else {
+			resultMap.put("result", "fail");
+		}
 		
-		Map<String, Object> result = new HashMap<>();
-		
-		result.put("name", name);
-		result.put("date", booking.getDate());
-		result.put("date", booking.getDay());
-		result.put("count", booking.getHeadcount());
-		result.put("state", booking.getState());
-		
-		return result;
+		return resultMap;
 	}
+		
 	
 
 }

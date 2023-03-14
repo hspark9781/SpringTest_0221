@@ -64,7 +64,7 @@
   	</delete>
   	
   	
-  	<select id="selectBooking" parameterType="string" resultType="com.hsp.spring.test.ajax.model.Booking">
+  	<select id="selectBooking" parameterType="map" resultType="com.hsp.spring.test.ajax.model.Booking">
 	  	SELECT 
 	 		`id`
 	 		, `name`
@@ -78,7 +78,8 @@
 	 	FROM
 	 	 	`booking`
 	 	WHERE
-	 	 	`name` = #{name} AND `phoneNumber` = #{phoneNumber}
+	 	 	`name` = #{name} 
+	 	 	AND `phoneNumber` = #{phoneNumber}
   	
   	
   	</select>

@@ -70,49 +70,52 @@
                             
 
        </div>
-       <script>
-            $(document).ready(function() {
+<script>
+	$(document).ready(function() {
                 
-				$("#selectBtn").on("click", function() {
-					alert();
-					let name = $("#nameInput").val();
-					let phoneNumber = $("#phoneNumberInput").val();
-					
-					if(name == "") {
-						alert("이름을 입력하세요.");
-						return;
+		$("#selectBtn").on("click", function() {
+			let name = $("#nameInput").val();
+			let phoneNumber = $("#phoneNumberInput").val();
+			if(name == "") {
+				alert("이름을 입력하세요.");
+				return;
+			}
+			
+			if(phoneNumber == "") {
+				alert("전화번호를 입력하세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/ajax/pension/search"
+				, data:{"name":name, "phoneNumber":phoneNumber}
+				, success:function(data) {
+					// result가 success면 조회 결과 있다.
+					if(data.result == "fail") {
+						alert("조회된 결과가 없습니다.");
+					} else {
+						let message = "이름 : " + data.info.name + "\n날짜 : " + data.info.date
+						 + "\n일수 : " + data.info.day + "\n인원 : " + data.info.headcount + "\n상태 : " + data.info.state;
+						
+						alert(message);
 					}
+				}
+				, error:function() {
+					alert("조회 에러");
+				}
+			});
 					
-					if((phoneNumber == "전화번호를 입력하세요.") {
-						alert();
-						return;
-					}
-					
-					
-					$.ajax({
-    					type:"get"	
-    					, url:"/ajax/pension/select"
-    					, data:{"name":name, "phoneNumber":phoneNumber}
-    					, success:function(data) {
-    						if(data.name == name && data.phoneNumber == phoneNumber) {
-    							alert(data.name + " " data.date + " " + data.day + " " + data.count + " " + data.state);
-    						} else {
-    							alert("일치하는 정보가 없습니다.");
-    						}
-    					}
-    					, error:function() {
-    						alert("조회 에러");
-    					}
-    				}); 
-				});
+		});
      
-            });
-        </script>
-
+     });
+</script>
 
 
 </body>
 </html>
+						
+				
 
                 
                 
